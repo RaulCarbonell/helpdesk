@@ -76,6 +76,10 @@ class HelpdeskTicket(models.Model):
         domain=[('res_model', '=', 'helpdesk.ticket')],
         string="Media Attachments")
     color = fields.Integer(string='Color Index')
+    kanban_state = fields.Selection([
+        ('normal', 'Default'),
+        ('done', 'Ready for next stage'),
+        ('blocked', 'Blocked')], string='Kanban State')
 
     def send_user_mail(self):
         self.env.ref('helpdesk_mgmt.assignment_email_template'). \
